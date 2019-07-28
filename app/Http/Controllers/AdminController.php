@@ -40,7 +40,7 @@ class AdminController extends Controller
         DB::table('categories')
             ->where('admin_id', $id)
             ->update(['admin_id'=>1]);
-
+;
         $user->delete();
         return back();
     }

@@ -1,6 +1,6 @@
-@extends('admin.admin-home')
+@extends('admin.home')
 @section('css')
-    @include('admin.books-css')
+    @include('admin.books.css')
 @endsection
 @section('content')
 <div class="box box-primary">
@@ -77,8 +77,6 @@
                     @endforeach
                 @endif
             </div>
-            <div class="col-md-4"></div>
-            <div class="col-md-4"></div>
 
         </div>
         <!-- /.box-body -->

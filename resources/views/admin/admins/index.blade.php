@@ -1,21 +1,18 @@
-@extends('admin.admin-home')
-@section('css')
-@include('admin.books-css')
-@endsection
+@extends('admin.home')
 @section('content')
 
     <section class="content">
         <div class="box box-primary">
-            <form action="/admin/books/create" method="get" enctype="multipart/form-data">
-                {{csrf_field()}}
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Add book</button>
-                </div>
+            <form action="/admin/admins/create" method="get" enctype="multipart/form-data">
+            {{csrf_field()}}
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Add admin</button>
+            </div>
             </form>
         </div>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Books</h3>
+                <h3 class="box-title">Admins</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -23,9 +20,7 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
+                        <th>Email</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th></th>
@@ -36,36 +31,34 @@
                     @foreach($list as $item)
                         <tr>
                             <th>{{$item->name}}</th>
-                            <th>{{$item->description}}</th>
-                            <th>{{$item->price}}</th>
-                            <th>{{$item->quantity}}</th>
+                            <th>{{$item->email}}</th>
                             <th>{{$item->created_at}}</th>
                             <th>{{$item->updated_at}}</th>
-                            <th>
-                                <form method="post" action="/admin/books/{{$item->id}}">
-                                    {{method_field('delete')}}
-                                    {{csrf_field()}}
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Delete</button>
-                                    </div>
-                                </form>
-                            </th>
-                            <th>
-                                <form action="/admin/books/{{$item->id}}/edit" method="get">
+                            @if($item->id!=1)
+                                <th>
+                                    <form method="post" action="/admin/admins/{{$item->id}}">
+                                        {{method_field('delete')}}
+                                        {{csrf_field()}}
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">Delete</button>
+                                        </div>
+                                    </form>
+                                </th>
+                                <th>
+                                    <form action="/admin/admins/{{$item->id}}/edit" method="get">
                                     {{csrf_field()}}
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">update</button>
                                     </div>
-                                </form>
-                            </th>
+                                    </form>
+                                </th>
+                            @endif
                         </tr>
                     @endforeach
                     <tfoot>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
+                        <th>Email</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th></th>

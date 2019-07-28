@@ -1,6 +1,6 @@
-@extends('admin.admin-home')
+@extends('admin.home')
 @section('css')
-    @include('admin.books-css')
+    @include('admin.books.css')
 @endsection
 @section('content')
     <div class="box box-primary">
@@ -27,6 +27,26 @@
                     <input name="price"
                            type="number" class="form-control"
                            value="{{$book->price}}">
+                </div><div class="form-group col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('name') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="form-group col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('description') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="form-group col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('price') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="form-group col-md-4">
                     <label>Quantity</label>
@@ -38,10 +58,22 @@
                     <label>Category</label>
                     <select class="select-css" name="category">
                         @foreach(\App\Category::all() as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @if($book->category_id == $category->id)
+                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                            @else
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('quantity') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
+                </div>
+
             </div>
             <!-- /.box-body -->
 

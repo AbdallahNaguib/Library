@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminsAuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest:admin');
-    }
 
     public function getAdminLogin(){
         return view('auth.admin_login');
@@ -25,6 +22,7 @@ class AdminsAuthController extends Controller
         if(Auth::guard('admin')->attempt(request()->only('email', 'password'))){
             return redirect('/admin');
         }
-        return redirect('/admin/login');
+        Session::flash('error','wrong email or password');
+        return redirect('/admin/login')->withInput();
     }
 }

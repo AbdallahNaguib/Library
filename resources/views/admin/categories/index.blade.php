@@ -1,17 +1,20 @@
-@extends('admin.admin-home')
+@extends('admin.home')
+@section('css')
+    @include('admin.books.css')
+@endsection
 @section('content')
     <section class="content">
         <div class="box box-primary">
-            <form action="/admin/users/create" method="get">
-            {{csrf_field()}}
-            <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Add user</button>
-            </div>
+            <form action="/admin/categories/create" method="get" enctype="multipart/form-data">
+                {{csrf_field()}}
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Add category</button>
+                </div>
             </form>
         </div>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Users</h3>
+                <h3 class="box-title">categories</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -19,7 +22,6 @@
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th></th>
@@ -30,12 +32,11 @@
                     @foreach($list as $item)
                         <tr>
                             <th>{{$item->name}}</th>
-                            <th>{{$item->email}}</th>
                             <th>{{$item->created_at}}</th>
                             <th>{{$item->updated_at}}</th>
                             @if($item->id!=1)
                                 <th>
-                                    <form method="post" action="/admin/users/{{$item->id}}">
+                                    <form method="post" action="/admin/categories/{{$item->id}}">
                                         {{method_field('delete')}}
                                         {{csrf_field()}}
                                         <div class="box-footer">
@@ -44,11 +45,11 @@
                                     </form>
                                 </th>
                                 <th>
-                                    <form action="/admin/users/{{$item->id}}/edit" method="get">
-                                    {{csrf_field()}}
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">update</button>
-                                    </div>
+                                    <form action="/admin/categories/{{$item->id}}/edit" method="get">
+                                        {{csrf_field()}}
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">update</button>
+                                        </div>
                                     </form>
                                 </th>
                             @endif
@@ -57,7 +58,6 @@
                     <tfoot>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th></th>

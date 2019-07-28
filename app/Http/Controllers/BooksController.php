@@ -9,17 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
 
     public function getBooks(){
         $books = Book::all();
-        return view('admin.books',['list'=>$books]);
+        return view('admin.books.index',['list'=>$books]);
     }
     public function addBook(){
-        return View('admin.books-create');
+        return View('admin.books.create');
     }
     public function postBook(Request $request){
         $rules = [
@@ -45,9 +41,16 @@ class BooksController extends Controller
     }
     public function getEditBook($id){
         $book=Book::find($id);
-        return view('admin.books-edit',['book'=>$book]);
+        return view('admin.books.edit',['book'=>$book]);
     }
     public function editBook($id){
+        $rules = [
+            'name' => 'required',
+            'description' => "required",
+            'price' => "required",
+            'quantity' => "required",
+        ];
+        $this->validate(request(),$rules);
         $book = Book::find($id);
         $book->name = request('name');
         $book->description = request('description');

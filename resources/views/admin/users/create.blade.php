@@ -1,8 +1,11 @@
-@extends('admin.admin-home')
+@extends('admin.home')
+@section('css')
+    @include('admin.books.css')
+@endsection
 @section('content')
 <div class="box box-primary">
-    <h1>Add admin</h1>
-    <form action="/admin/admins/create" method="post"
+    <h1>Add user</h1>
+    <form action="/admin/users/create" method="post"
           enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="box-body">
@@ -10,7 +13,7 @@
                 <label >Name</label>
                 <input name="name"
                        type="text" class="form-control" placeholder="Enter name"
-                        value="{{old('name')}}">
+                       value="{{old('name')}}">
             </div>
 
             <div class="form-group col-md-4">

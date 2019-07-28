@@ -6,8 +6,13 @@
 <!-- general form elements -->
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Login</h3>
+        <h3 class="box-title">Admin Login</h3>
     </div>
+    @if(Session::has('error'))
+        <div class="alert alert-error">
+            {{ Session::get('error') }}
+        </div>
+    @endif
     <!-- /.box-header -->
     <!-- form start -->
     <form method="POST" action="{{url('admin/logn')}}">

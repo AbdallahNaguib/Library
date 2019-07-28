@@ -10,19 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
+
     public function index(){
-        return View('admin.admin-home');
+        return View('admin.home');
     }
     public function addAdmin(){
-        return View('admin.admins-create');
+        return View('admin.admins.create');
     }
     public function getAdmins(){
         $admins = Admin::all();
-        return view('admin.admins',['list'=>$admins]);
+        return view('admin.admins.index',['list'=>$admins]);
     }
     public function postAdmin(Request $request){
         $rules = [
@@ -49,7 +46,7 @@ class AdminController extends Controller
     }
     public function getEditAdmin($id){
         $user=Admin::find($id);
-        return view('admin.admins-edit',['admin'=>$user]);
+        return view('admin.admins.edit',['admin'=>$user]);
     }
     public function editAdmin($id){
         if(strlen(request('password'))==0){

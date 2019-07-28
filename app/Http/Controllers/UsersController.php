@@ -8,16 +8,12 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     public function getUsers(){
         $users = User::all();
-        return view('admin.users',['list'=>$users]);
+        return view('admin.users.index',['list'=>$users]);
     }
     public function addUser(){
-        return View('admin.users-create');
+        return View('admin.users.create');
     }
     public function postUser(Request $request){
         $rules = [
@@ -47,7 +43,7 @@ class UsersController extends Controller
     }
     public function getEditUser($id){
         $user=User::find($id);
-        return view('admin.users-edit',['user'=>$user]);
+        return view('admin.users.edit',['user'=>$user]);
     }
     public function editUser($id){
         if(strlen(request('password'))==0){

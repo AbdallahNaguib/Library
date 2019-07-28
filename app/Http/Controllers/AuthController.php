@@ -8,16 +8,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
-
-
     public function getLogin(){
         return View('login');
     }
@@ -30,7 +24,8 @@ class AuthController extends Controller
         if(Auth::attempt(request()->only('email', 'password'))){
             return redirect('/home');
         }
-        return redirect('/login');
+        Session::flash('error','wrong email or password');
+        return redirect('/login')->withInput();
     }
     public function getRegister(){
         return View('register');

@@ -1,18 +1,20 @@
-@extends('admin.admin-home')
+@extends('admin.home')
+@section('css')
+    @include('admin.books.css')
+@endsection
 @section('content')
-
     <section class="content">
         <div class="box box-primary">
-            <form action="/admin/admins/create" method="get" enctype="multipart/form-data">
+            <form action="/admin/users/create" method="get">
             {{csrf_field()}}
             <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Add admin</button>
+                <button type="submit" class="btn btn-primary">Add user</button>
             </div>
             </form>
         </div>
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Admins</h3>
+                <h3 class="box-title">Users</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -36,7 +38,7 @@
                             <th>{{$item->updated_at}}</th>
                             @if($item->id!=1)
                                 <th>
-                                    <form method="post" action="/admin/admins/{{$item->id}}">
+                                    <form method="post" action="/admin/users/{{$item->id}}">
                                         {{method_field('delete')}}
                                         {{csrf_field()}}
                                         <div class="box-footer">
@@ -45,7 +47,7 @@
                                     </form>
                                 </th>
                                 <th>
-                                    <form action="/admin/admins/{{$item->id}}/edit" method="get">
+                                    <form action="/admin/users/{{$item->id}}/edit" method="get">
                                     {{csrf_field()}}
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">update</button>

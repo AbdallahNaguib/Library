@@ -1,4 +1,4 @@
-@extends('admin.admin-home')
+@extends('admin.home')
 @section('content')
     <div class="box box-primary">
         <h1>Update admin</h1>
@@ -24,6 +24,27 @@
                     <input name="password"
                            type="password" class="form-control"
                            placeholder="Enter password">
+                </div>
+                <div class="col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('name') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('email') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="col-md-4">
+                    @if(@$errors)
+                        @foreach($errors->get('password') as $message)
+                            <span class='help-inline text-danger'>{{ $message }}</span>
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <!-- /.box-body -->

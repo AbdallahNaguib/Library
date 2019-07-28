@@ -8,6 +8,11 @@
     <div class="box-header with-border">
         <h3 class="box-title">Login</h3>
     </div>
+    @if(Session::has('error'))
+        <div class="alert alert-error">
+            {{ Session::get('error') }}
+        </div>
+    @endif
     <!-- /.box-header -->
     <!-- form start -->
     <form method="POST" action="{{url('logn')}}">
@@ -16,7 +21,6 @@
             <div class="form-group">
                 <label>Email address</label>
                 <input name="email" type="email" class="form-control"
-                       id="exampleInputEmail1"
                        placeholder="Enter email" value="{{old('email')}}">
                 @if(@$errors)
                     @foreach($errors->get('email') as $message)
@@ -26,7 +30,8 @@
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" name="password"
+                       class="form-control" placeholder="Password">
                 @if(@$errors)
                     @foreach($errors->get('password') as $message)
                         <span class='help-inline text-danger'>{{ $message }}</span>

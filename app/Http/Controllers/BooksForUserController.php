@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class BooksForUserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function show($id){
         $book = Book::find($id);
         return view('books.show',['book'=>$book]);

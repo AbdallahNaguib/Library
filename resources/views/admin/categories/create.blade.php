@@ -1,4 +1,7 @@
-@extends('admin.admin-home')
+@extends('admin.home')
+@section('css')
+    @include('admin.books.css')
+@endsection
 @section('content')
 <div class="box box-primary">
     <h1>Add category</h1>
